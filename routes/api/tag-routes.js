@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
       include: [{ model: Product, through: ProductTag }],
     });
     if (!tagData) {
-      res.status(404).json({ message: `No tag with ID ${req.params.id}` });
+      res.status(404).json({ message: "No tag with that id" });
       return;
     }
     res.status(200).json(tagData);
@@ -34,13 +34,10 @@ router.get("/:id", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  // {
-  //   tag_name: "Basketball",
-  // }
   try {
     // create a new tag
     const tagData = await Tag.create(req.body);
-    res.status(200).json({ message: `Successfully created` });
+    res.status(200).json({ message: "Created" });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -57,7 +54,7 @@ router.put("/:id", async (req, res) => {
     });
     res
       .status(200)
-      .json({ message: `Successfully updated ID ${req.params.id}` });
+      .json({ message: "Updated id" });
   } catch (err) {
     res.status(400).json(err);
   }
@@ -72,12 +69,12 @@ router.delete("/:id", async (req, res) => {
       },
     });
     if (!tagData) {
-      res.status(404).json({ message: `No tag with ID ${req.params.id}` });
+      res.status(404).json({ message: "No tag with that id" });
       return;
     }
     res
       .status(200)
-      .json({ message: `Successfully deleted ID ${req.params.id}` });
+      .json({ message: "tag deleted" });
   } catch (err) {
     res.status(500).json(err);
   }
